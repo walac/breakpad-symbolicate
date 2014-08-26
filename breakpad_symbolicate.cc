@@ -48,7 +48,7 @@ main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	if (resolver.LoadModule(&code_module, symbol_file)) {
+	if (!resolver.LoadModule(&code_module, symbol_file)) {
 		cerr << "Error loading module " << symbol_file << endl;
 		return EXIT_FAILURE;
 	}
