@@ -60,10 +60,17 @@ main(int argc, char **argv)
 		frame.instruction = strtoul(argv[i], NULL, 0);
 		resolver.FillSourceLineInfo(&frame);
 
-		if (frame.function_name.empty())
-			cout << "Function not found for address " << argv[i] << "\n";
-		else
-			cout << frame.function_name << "\n";
+		if (frame.function_name.empty()) {
+			cout << "??\n??:0\n";
+		} else {
+			cout
+				<< frame.function_name
+				<< "\n"
+				<< frame.source_file_name
+				<< ":"
+				<< frame.source_line
+				<< "\n";
+		}
 
 		frame.function_name.clear();
 	}
