@@ -8,8 +8,6 @@
 
 #include "google_breakpad/processor/code_module.h"
 
-#define OVERRIDE
-
 // Given a path and a module name, fills the CodeModule fields
 class SimpleCodeModule : public google_breakpad::CodeModule {
 public:
@@ -17,28 +15,28 @@ public:
 		const std::string &root_path,
 		const std::string &code_module);
 
-	uint64_t base_address() const OVERRIDE
+	uint64_t base_address() const
 	{ return 0; }
 
-	uint64_t size() const OVERRIDE
+	uint64_t size() const
 	{ return 0; }
 
-	std::string code_file() const OVERRIDE
+	std::string code_file() const
 	{ return code_file_; }
 
-	std::string code_identifier() const OVERRIDE
+	std::string code_identifier() const
 	{ return code_identifier_; }
 
-	std::string debug_file() const OVERRIDE
+	std::string debug_file() const
 	{ return debug_file_; }
 
-	std::string debug_identifier() const OVERRIDE
+	std::string debug_identifier() const
 	{ return debug_identifier_; }
 
-	std::string version() const OVERRIDE
+	std::string version() const
 	{ return ""; }
 
-	const CodeModule *Copy() const OVERRIDE;
+	const CodeModule *Copy() const;
 
 private:
 	std::string debug_identifier_;
