@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cstdlib>
+#include <errno.h>
 
 #include "simple_code_module.h"
 
@@ -56,8 +57,17 @@ main(int argc, char **argv)
 	StackFrame frame;
 	frame.module = &code_module;
 
+	char *endptr;
+
 	for (int i = 3; i < argc; ++i) {
-		frame.instruction = strtoul(argv[i], NULL, 0);
+		errno = 0;
+		frame.instruction = strtoul(argv[i], &endptr, 0);
+
+		if (errno || *endptr) {
+			cerr << "Invalid address: " << argv[i] << "\n";
+			return EXIT_FAILURE;
+		}
+
 		resolver.FillSourceLineInfo(&frame);
 
 		if (frame.function_name.empty()) {
